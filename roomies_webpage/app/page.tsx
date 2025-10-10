@@ -1,7 +1,6 @@
 import Nav from "./components/nav";
 import Footer from "./components/footer";
 import {subscribe} from './actions/actions';
-import BlogForm from './components/BlogForm';
 
 export default function HomePage() {
   return (
@@ -70,8 +69,6 @@ export default function HomePage() {
           </div>
         </div>
       </main>
-
-      {/* Blog moved to /blog page */}
 
       {/* Keep existing footer */}
       <Footer />
