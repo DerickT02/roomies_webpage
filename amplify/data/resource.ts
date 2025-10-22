@@ -21,8 +21,8 @@ Blog: a.model({
   url: a.string(),
   content: a.string(),
   author: a.string(),
-  postedDate: a.date(),
-  updateDate: a.date(),
+  postedDate: a.datetime(),
+  updateDate: a.datetime(),
   summary: a.string(),
   categories: a.hasMany("Category", "blogId"), // relationship
 }).authorization((allow) => [allow.publicApiKey()]),
