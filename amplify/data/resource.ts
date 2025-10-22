@@ -19,7 +19,7 @@ const schema = a.schema({
 Blog: a.model({
   title: a.string(),
   url: a.string(),
-  content: a.string(),
+  content: a.json(),
   author: a.string(),
   postedDate: a.datetime(),
   updateDate: a.datetime(),

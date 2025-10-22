@@ -16,7 +16,7 @@ export default function BlogForm() {
       title: (fd.get('title') as string) || '',
       url: (fd.get('url') as string) || '',
       author: (fd.get('author') as string) || '',
-      content: (fd.get('content') as string) || '',
+      content: fd.get('content') || '',
       summary: (fd.get('summary') as string) || '',
       categories: (fd.get('categories') as string) || '',
     };
@@ -25,7 +25,6 @@ export default function BlogForm() {
     if (payload.title.trim().length < 3) return setError('Title must be at least 3 characters');
     if (payload.url.trim().length < 3) return setError('URL must be at least 3 characters');
     if (payload.author.trim().length < 1) return setError('Author is required');
-    if (payload.content.trim().length < 10) return setError('Content must be at least 10 characters');
 
     setLoading(true);
     try {
