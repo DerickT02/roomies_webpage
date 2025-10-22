@@ -19,10 +19,10 @@ const schema = a.schema({
 Blog: a.model({
   title: a.string(),
   url: a.string(),
-  content: a.string(),
+  content: a.json(),
   author: a.string(),
-  postedDate: a.date(),
-  updateDate: a.date(),
+  postedDate: a.datetime(),
+  updateDate: a.datetime(),
   summary: a.string(),
   categories: a.hasMany("Category", "blogId"), // relationship
 }).authorization((allow) => [allow.publicApiKey()]),
