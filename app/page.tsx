@@ -25,7 +25,7 @@ export default function HomePage() {
           </p>
 
           <form
-            method="post"
+            method="POST"
             action={subscribe}
             className="mx-auto max-w-xl"
             aria-label="Subscribe to Roomies updates"
