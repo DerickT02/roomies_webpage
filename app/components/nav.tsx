@@ -47,12 +47,12 @@ export default function Nav() {
           </Link>
         </nav>
         <div className="flex items-center gap-3">
-          <button className="hidden sm:inline-flex px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors">
-            <Link href="#">Sign In</Link>
-          </button>
-          <button className="px-6 py-2 bg-cyan-800 text-white rounded-lg hover:bg-cyan-700 transition-colors flex items-center justify-center gap-2">
-            <Link href="#">Get Started</Link>
-          </button>
+          <Link href="/login" className="hidden sm:inline-flex px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors">
+            Login
+          </Link>
+          <Link href="/signup" className="px-6 py-2 bg-cyan-800 text-white rounded-lg hover:bg-cyan-700 transition-colors flex items-center justify-center gap-2">
+            Get Started
+          </Link>
         </div>
       </div>
     </header>
