@@ -32,7 +32,7 @@ export default function BlogForm() {
     if (payload.title.trim().length < 3) return setError('Title must be at least 3 characters');
     if (payload.url.trim().length < 3) return setError('URL must be at least 3 characters');
     if (payload.author.trim().length < 1) return setError('Author is required');
-    if ((payload.content || '').trim().length < 10) return setError('Content must be at least 10 characters');
+
 
     setLoading(true);
     try {
@@ -75,7 +75,7 @@ export default function BlogForm() {
           }}
           modules={{
             toolbar: [
-              [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+              [{ 'header': [2, 3, 4, 5, 6, false] }],
               [{ 'font': [] }],
               [{ 'size': ['small', false, 'large', 'huge'] }],
               ['bold', 'italic', 'underline', 'strike'],
