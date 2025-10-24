@@ -62,3 +62,24 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: err?.message ?? String(err) }, { status: 500 });
   }
 }
+
+export async function GET() {
+  try {
+    if (!client || !client.models || !client.models.Blog) {
+      return NextResponse.json({ ok: false, error: 'Data client not available' }, { status: 500 });
+    }
+
+    const res: any = await client.models.Blog.list();
+    // Normalize common shapes: { data: [...] } or { items: [...] } or raw array
+    let data: any = null;
+    if (Array.isArray(res)) data = res;
+    else if (res?.data && Array.isArray(res.data)) data = res.data;
+    else if (res?.items && Array.isArray(res.items)) data = res.items;
+    else data = res;
+
+    return NextResponse.json({ ok: true, data: data ?? [] });
+  } catch (err: any) {
+    console.error('GET /api/blog error', err);
+    return NextResponse.json({ ok: false, error: err?.message ?? String(err) }, { status: 500 });
+  }
+}
