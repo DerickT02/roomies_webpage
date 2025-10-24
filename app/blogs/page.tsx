@@ -3,7 +3,7 @@ export default async function Page() {
   // Fetch blog list from internal API and normalize into an array
   let allPosts: any[] = []
   try {
-    const res = await fetch('http://localhost:3000/api/blog', { cache: 'no-store' })
+    const res = await fetch(`${process.env.URL}api/blog`, { cache: 'no-store' })
     if (res.ok) {
       const json = await res.json()
       console.log('Fetched /api/blog:', json)
