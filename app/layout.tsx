@@ -1,6 +1,8 @@
 import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
+import "@aws-amplify/ui-react/styles.css"
+import AmplifyClientProvider from "./components/amplify-provider"
 
 export const metadata: Metadata = {
   title: "Roomies - Find Your Perfect Roommate",
@@ -15,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">
+        <AmplifyClientProvider>{children}</AmplifyClientProvider>
+      </body>
     </html>
   )
 }
