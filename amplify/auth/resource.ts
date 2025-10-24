@@ -1,7 +1,7 @@
 // amplify/auth/resource.ts
 import { defineAuth } from "@aws-amplify/backend";
 
-<<<<<<< Updated upstream
+
 
 
 export const auth = defineAuth({
@@ -28,10 +28,4 @@ export const auth = defineAuth({
     totp: true,
   },
 });
-=======
-/**
- * Define and configure your auth resource
- * @see https://docs.amplify.aws/gen2/build-a-backend/auth
- */
 
->>>>>>> Stashed changes
