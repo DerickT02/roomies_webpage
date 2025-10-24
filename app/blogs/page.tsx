@@ -4,9 +4,9 @@ export default async function Page() {
   let allPosts: any[] = []
   try {
     const isDev = process.env.NODE_ENV === 'development'
-  const baseUrl = isDev 
-    ? process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
-    : process.env.NEXT_PUBLIC_PROD_URL || ''
+const baseUrl = isDev 
+  ? process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+  : process.env.NEXT_PUBLIC_PROD_URL || ''
   const res = await fetch(`${baseUrl}/api/blog`, { cache: 'no-store' })
     if (res.ok) {
       const json = await res.json()

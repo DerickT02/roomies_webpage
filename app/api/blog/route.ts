@@ -8,6 +8,7 @@ type Body = {
   author?: unknown;
   summary?: unknown;
   categories?: unknown;
+  delta: unknown;
 };
 
 function isString(v: unknown): v is string {
@@ -24,9 +25,7 @@ function validateBody(body: Body) {
   if (!isString(body.author) || body.author.trim().length < 1) {
     return 'Author is required.';
   }
-  if (!isString(body.content) || body.content.trim().length < 10) {
-    return 'Content is required and must be at least 10 characters.';
-  }
+
   return null;
 }
 
@@ -38,7 +37,7 @@ export async function POST(request: Request) {
 
     const title = (body.title as string).trim();
     const url = (body.url as string).trim();
-    const content = (body.content as string).trim();
+    const content = JSON.stringify(body.delta);
     const author = (body.author as string).trim();
     const summary = isString(body.summary) ? (body.summary as string).trim().slice(0, 500) : '';
     const categories = isString(body.categories) ? (body.categories as string).split(',').map(s => s.trim()).filter(Boolean) : [];
@@ -46,7 +45,7 @@ export async function POST(request: Request) {
     const { data, errors } = await client.models.Blog.create({
       title,
       url,
-      content,
+      content, // store content as delt
       author,
       postedDate: new Date().toISOString(),
       updateDate: new Date().toISOString(),
