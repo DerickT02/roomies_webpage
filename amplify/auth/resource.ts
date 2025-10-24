@@ -1,7 +1,6 @@
 // amplify/auth/resource.ts
+
 import { defineAuth } from "@aws-amplify/backend";
-
-
 
 export const auth = defineAuth({
   loginWith: {
@@ -14,11 +13,11 @@ export const auth = defineAuth({
   },
   userAttributes: {
     givenName: {
-      mutable: true,
+      mutable: false,
       required: true,
     },
     familyName: {
-      mutable: true,
+      mutable: false,
       required: true,
     },
   },
