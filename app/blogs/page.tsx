@@ -1,29 +1,34 @@
+// app/blogs/page.tsx
+
 import Link from 'next/link'
+// 1. Import your Amplify client
+//    Update this path to point to your actual Amplify client file
+import { client } from '../index'
+
 export default async function Page() {
-  // Fetch blog list from internal API and normalize into an array
   let allPosts: any[] = []
+  
   try {
-    const isDev = process.env.NODE_ENV === 'development'
-const baseUrl = isDev 
-  ? process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
-  : process.env.NEXT_PUBLIC_PROD_URL || ''
-  const res = await fetch(`${baseUrl}/api/blog`, { cache: 'no-store' })
-    if (res.ok) {
-      const json = await res.json()
-      console.log('Fetched /api/blog:', json)
-      // Normalize common shapes: raw array, { data: [...] }, { ok: true, data: [...] }
-      if (Array.isArray(json)) allPosts = json
-      else if (Array.isArray(json?.data)) allPosts = json.data
-      else if (Array.isArray(json?.data?.data)) allPosts = json.data.data
-      else allPosts = []
-    } else {
-      allPosts = []
+    // 2. This is your database logic, now running directly in the page
+    if (!client || !client.models || !client.models.Blog) {
+      throw new Error('Data client not available');
     }
-  } catch (err) {
-    console.error('Failed to fetch /api/blog:', err)
+
+    const res: any = await client.models.Blog.list();
+
+    // 3. This is your normalization logic for the direct DB response
+    if (Array.isArray(res)) allPosts = res;
+    else if (res?.data && Array.isArray(res.data)) allPosts = res.data;
+    else if (res?.items && Array.isArray(res.items)) allPosts = res.items;
+    else allPosts = []; // Default to empty array if no data is found
+
+  } catch (err: any) {
+    // 4. The catch block now handles database errors, not fetch errors
+    console.error('Failed to fetch posts from database:', err);
     allPosts = []
   }
 
+  // 5. The rest of your page component's JSX remains the same
   return (
     <div className="container mx-auto py-12 px-4">
       <header className="max-w-4xl mx-auto text-center mb-8">
