@@ -14,8 +14,6 @@ const schema = a.schema({
     }).authorization((allow) => [allow.publicApiKey()]),
     
 
-
-
 Blog: a.model({
   title: a.string(),
   url: a.string(),
