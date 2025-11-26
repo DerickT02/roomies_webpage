@@ -20,7 +20,17 @@ export default function SignupPage() {
     <div className="min-h-screen bg-white flex flex-col">
       <Nav />
       <main className="flex-1 flex items-center justify-center">
-        <Authenticator initialState="signUp" />
+        <Authenticator
+          initialState="signUp"
+          signUpAttributes={[
+            'email',
+            'given_name',
+            'family_name',
+            'birthdate',
+            'phone_number',
+            'address',
+          ]}
+        />
       </main>
       <Footer />
     </div>
