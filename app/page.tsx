@@ -1,6 +1,6 @@
 import Nav from "./components/nav";
 import Footer from "./components/footer";
-import {subscribe} from './actions/actions';
+import { subscribe } from './actions/actions';
 
 export default function HomePage() {
   return (
@@ -14,6 +14,7 @@ export default function HomePage() {
             Join our early access list
           </span>
 
+
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Get the inside scoop on Roomies
           </h1>
@@ -25,7 +26,6 @@ export default function HomePage() {
           </p>
 
           <form
-            method="post"
             action={subscribe}
             className="mx-auto max-w-xl"
             aria-label="Subscribe to Roomies updates"

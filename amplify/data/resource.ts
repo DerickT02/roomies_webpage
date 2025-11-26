@@ -6,40 +6,42 @@ adding a new "isDone" field as a boolean. The authorization rule below
 specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
+
 const schema = a.schema({
-  
   Todo: a
     .model({
       content: a.string(),
-    }).authorization((allow) => [allow.publicApiKey()]),
-    
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
 
-Blog: a.model({
-  title: a.string(),
-  url: a.string(),
-  content: a.string(),
-  author: a.string(),
-  postedDate: a.date(),
-  updateDate: a.date(),
-  summary: a.string(),
-  categories: a.hasMany("Category", "blogId"), // relationship
-}).authorization((allow) => [allow.publicApiKey()]),
+  Blog: a
+    .model({
+      title: a.string(),
+      url: a.string(),
+      content: a.string(),
+      author: a.string(),
+      postedDate: a.date(),
+      updateDate: a.date(),
+      summary: a.string(),
+      categories: a.hasMany("Category", "blogId"), // relationship
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
 
-Category: a.model({
-  name: a.string(),
-  blogId: a.id(), // foreign key
-  blog: a.belongsTo("Blog", "blogId"), // relationship
-}).authorization((allow) => [allow.publicApiKey()]),
+  Category: a
+    .model({
+      name: a.string(),
+      blogId: a.id(), // foreign key
+      blog: a.belongsTo("Blog", "blogId"), // relationship
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
 
-  Email: a.model({
-    email: a.string(),
-    sentDate: a.datetime(),
-  }).authorization((allow) => [allow.publicApiKey().to(["create"])]),
-
-  
+  Email: a
+    .model({
+      email: a.string(),
+      sentDate: a.datetime(),
+    })
+    .authorization((allow) => [allow.publicApiKey().to(["create"])]),
 });
-
-
 
 export type Schema = ClientSchema<typeof schema>;
 
@@ -49,15 +51,13 @@ export const data = defineData({
   // can use the Data API by default. Keep apiKey if you still need public read-only
   // access, but avoid using apiKey for create operations.
   authorizationModes: {
-  defaultAuthorizationMode: "userPool",
+    defaultAuthorizationMode: "userPool",
     // Optionally keep an apiKey for public (read-only) access; comment out if not needed
     apiKeyAuthorizationMode: {
       expiresInDays: 30,
     },
   },
 });
-
-
 
 /*== STEP 2 ===============================================================
 Go to your frontend source code. From your client-side code, generate a

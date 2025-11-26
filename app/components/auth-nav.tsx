@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useEffect, useState } from "react";
 import { fetchUserAttributes } from "aws-amplify/auth";
 
 export default function AuthNav() {
+  const router = useRouter();
   const { user, signOut, authStatus } = useAuthenticator((context) => [
     context.user,
     context.authStatus,
@@ -26,6 +28,11 @@ export default function AuthNav() {
     }
   }, [user]);
 
+  const handleSignOut = async () => {
+    await signOut();
+    router.push("/");
+  };
+
   if (authStatus === "authenticated" && userAttributes?.given_name) {
     return (
       <div className="flex items-center gap-3">
@@ -33,7 +40,7 @@ export default function AuthNav() {
           Hi, {userAttributes.given_name}
         </span>
         <button
-          onClick={signOut}
+          onClick={handleSignOut}
           className="px-4 py-2 text-gray-600 hover:text-gray-900 hover:underline transition-colors"
         >
           Sign Out
@@ -47,7 +54,7 @@ export default function AuthNav() {
       <div className="flex items-center gap-3">
         <span className="hidden sm:inline"> </span>
         <button
-          onClick={signOut}
+          onClick={handleSignOut}
           className="px-4 py-2 text-gray-600 hover:text-gray-900 hover:underline transition-colors"
         >
           Sign Out
